@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './widgets/chart.dart';
 import './widgets/transaction_card.dart';
@@ -6,6 +7,10 @@ import './widgets/transaction_list.dart';
 import 'model/transaction.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(
     PersonalExpenses(),
   );
@@ -19,7 +24,6 @@ class PersonalExpenses extends StatefulWidget {
 }
 
 class PersonalExpensesState extends State<PersonalExpenses> {
-
   void addNewTransaction(String txTitle, double txAmount, DateTime date) {
     String id;
     id = DateTime.now().toString();
@@ -49,7 +53,7 @@ class PersonalExpensesState extends State<PersonalExpenses> {
 
   void deleteTransaction(String id) {
     setState(() {
-      userTransaction.removeWhere((tx){
+      userTransaction.removeWhere((tx) {
         return tx.id == id;
       });
     });
@@ -60,7 +64,8 @@ class PersonalExpensesState extends State<PersonalExpenses> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: "Quicksand",
-        primaryColor: Colors.greenAccent
+        primaryColor: Colors.greenAccent,
+        accentColor: Colors.purpleAccent,
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
